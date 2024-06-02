@@ -2,7 +2,11 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { getDownloadURL, getStorage, uploadBytesResumable, ref } from 'firebase/storage'
 import { app } from '../firebase';
-import {updateUserStart,updateUserSuccess,updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, logoutUserStart, logoutUserFailure, logoutUserSuccess} from '../redux/user/userSlice.js'
+import {updateUserStart,updateUserSuccess,updateUserFailure,
+   deleteUserFailure, deleteUserStart, deleteUserSuccess, logoutUserStart,
+    logoutUserFailure, logoutUserSuccess} from '../redux/user/userSlice.js'
+
+ import {Link} from 'react-router-dom'   
 
 const Profile = () => {
   const { currentUser ,loading,error} = useSelector((state) => state.user);
@@ -141,6 +145,7 @@ const Profile = () => {
         <input type="text" placeholder='email' className='border p-3 rounded-lg' id='email' defaultValue={currentUser.email}  onChange={handleChange}/>
         <input type="password" placeholder='password' className='border p-3 rounded-lg' id='password' onChange={handleChange} />
         <button className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-95' disabled={loading}>{loading? 'Loading':'Update'}</button>
+        <Link to='/create-listing' className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95' >Create Listing</Link>
       </form>
 
       <div className='flex justify-between mt-5'>
