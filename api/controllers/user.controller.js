@@ -1,5 +1,6 @@
 import { errorHandler } from "../utils/error.js"
 import bcrypt from 'bcrypt'
+import User from '../models/user.model.js'
 
 export const test = (req,res)=>{
     res.json({
@@ -8,7 +9,7 @@ export const test = (req,res)=>{
 }
 
 export const updateUser = async(req,res,next)=>{
-    if(req.user.id == req.params.id) return next(errorHandler(401, "You can Only update your own account"))
+    if(req.user.id !== req.params.id) return next(errorHandler(401, "You can Only update your own account"))
         try{
     if(req.body.password){
         const hashPassword=await bcrypt.hash(req.body.password,10) 
