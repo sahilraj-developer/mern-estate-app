@@ -6,20 +6,21 @@ import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js'
 import connectDB from './utils/db.js'
 import cookieParser from "cookie-parser";
-import cors from 'cors'
+import cors from 'cors';
+import path from 'path';
 
 configDotenv();
 const app = express();
 app.use(cookieParser());
 app.use((req, res, next) => {
-    console.log('Cookies:', req.cookies);
+    // console.log('Cookies:', req.cookies);
     next();
 });
 connectDB();
 app.use(express.json())
 app.use(cors())
 
-
+const __dirname = path.resolve();
 
 app.use('/api/user',userRouter);
 app.use('/api/auth',authRouter);
